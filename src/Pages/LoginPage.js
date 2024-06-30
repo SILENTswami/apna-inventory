@@ -1,8 +1,53 @@
 import React from "react";
-import { Button, Input } from "reactstrap";
+import { Alert, Button, Input, InputGroup, InputGroupText } from "reactstrap";
+import axios from "axios";
+import { baseUrl } from "..";
 
 class LoginPage extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            email: "",
+            password: "",
+            passwordType: "password",
+            messageColor: "success",
+            message: "",
+            isLoading: false
+        }
+    }
     render() {
+        const onChange = (e) => {
+            const { name, value } = e.target
+            this.setState({ [name]: value })
+        }
+        const changePasswordType = () => {
+            if (this.state.passwordType === "password")
+                this.setState({ passwordType: "text" })
+            else
+                this.setState({ passwordType: "password" })
+        }
+
+        const onSubmit = () => {
+            const { password, email } = this.state
+            const data = { password, email }
+            axios.post(`${baseUrl}/auth/login`, data).then(result => {
+                this.setState({ messageColor: "success", isLoading: false, message: "Login Successful. Redirecting.." })
+                setTimeout(() => {
+                    this.setState({ message: "" })
+                }, 3000)
+                localStorage.setItem ("token", result.data.token)
+                window.location.reload ()
+            }).catch(err => {
+                console.log(err.message)
+                this.setState({ messageColor: "danger", isLoading: false, message: err.message })
+                setTimeout(() => {
+                    this.setState({ message: "" })
+                }, 3000)
+            })
+        }
+
+        const isDisabled = !(this.state.email && this.state.password) || this.state.isLoading
+
         return (
             <div className="row">
                 <div className="col-lg-5">
@@ -17,12 +62,21 @@ class LoginPage extends React.Component {
                 <div className="col-lg-7">
                     <div style={{ height: "100vh", width: "50%", margin: "auto" }} className="d-flex flex-column align-items-center justify-content-center gap-3">
                         <div className="text-dark-o h1 mb-5">Login</div>
-                        <Input placeholder="Email" />
-                        <Input placeholder="Password" />
-                        <Button className="px-5cd ..
-                        cd  bg-primary-o">
-                            Login
+                        <Input placeholder="Email" onChange={onChange} value={this.state.email} name="email" />
+                        <InputGroup className="border rounded">
+                            <Input className="border-0" placeholder="Password" onChange={onChange} value={this.state.password} name="password" type={this.state.passwordType} />
+                            <InputGroupText style={{ cursor: "pointer" }} onClick={changePasswordType} className="bg-transparent border-0">
+                                {this.state.passwordType === "password" ? <i class="bi bi-eye-fill"></i> : <i class="bi bi-eye-slash-fill"></i>}
+                            </InputGroupText>
+                        </InputGroup>
+                        <Button disabled={isDisabled} onClick={onSubmit} className="px-5 bg-primary-o">
+                            {this.state.isLoading ? "Loading.." : "Login"}
                         </Button>
+                        {this.state.message &&
+                            <Alert color={this.state.messageColor}>
+                                {this.state.message}
+                            </Alert>
+                        }
                     </div>
                 </div>
             </div>
@@ -31,3 +85,5 @@ class LoginPage extends React.Component {
 }
 
 export default LoginPage
+
+// Account Credentials: test@gmail.com and Test1234
