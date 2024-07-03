@@ -10,4 +10,4 @@ root.render(
   </React.StrictMode>
 );
 
-export const baseUrl = process.env.NODE_ENV === "development" ? "http://localhost:5000" : ""
+export const baseUrl = process.env.NODE_ENV === "development" ? "http://localhost:5000" : "https://zostel-backend-g4xz.onrender.com"

@@ -49,8 +49,8 @@ class LoginPage extends React.Component {
         const isDisabled = !(this.state.email && this.state.password) || this.state.isLoading
 
         return (
-            <div className="row">
-                <div className="col-lg-5">
+            <div className="row row-cols-md-2 row-cols-1 g-0">
+                <div className="col-md-5">
                     <div className="p-5 bg-primary-o" style={{ height: "100vh" }}>
                         <img src={require("../Assets/Logo.png")} alt="zostel" />
                         <div className="text-center" style={{ marginTop: "10rem" }}>
@@ -59,7 +59,7 @@ class LoginPage extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="col-lg-7">
+                <div className="col-md-7">
                     <div style={{ height: "100vh", width: "50%", margin: "auto" }} className="d-flex flex-column align-items-center justify-content-center gap-3">
                         <div className="text-dark-o h1 mb-5">Login</div>
                         <Input placeholder="Email" onChange={onChange} value={this.state.email} name="email" />
