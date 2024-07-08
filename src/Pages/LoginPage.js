@@ -2,6 +2,7 @@ import React from "react";
 import { Alert, Button, Input, InputGroup, InputGroupText } from "reactstrap";
 import axios from "axios";
 import { baseUrl } from "..";
+import { Navigate } from "react-router-dom";
 
 class LoginPage extends React.Component {
     constructor() {
@@ -30,6 +31,7 @@ class LoginPage extends React.Component {
         const onSubmit = () => {
             const { password, email } = this.state
             const data = { password, email }
+            this.setState ({isLoading: true})
             axios.post(`${baseUrl}/auth/login`, data).then(result => {
                 this.setState({ messageColor: "success", isLoading: false, message: "Login Successful. Redirecting.." })
                 setTimeout(() => {
@@ -47,7 +49,9 @@ class LoginPage extends React.Component {
         }
 
         const isDisabled = !(this.state.email && this.state.password) || this.state.isLoading
-
+        
+        if (localStorage.getItem("token"))
+            return <Navigate to="/inventory" />
         return (
             <div className="row row-cols-md-2 row-cols-1 g-0">
                 <div className="col-md-5">
