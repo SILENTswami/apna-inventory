@@ -13,10 +13,10 @@ class App extends React.Component {
       <div>
         {localStorage.getItem("token") && <Toolbar/>}
         <Routes>
-          {/* <Route path="/" exact element={<LoginPage />} />
+          <Route path="/" exact element={<LoginPage />} />
           <Route path="/reservation" exact element={<PrivateRoute><Reservation /></PrivateRoute>} />
-          <Route path="/add-inventory" exact element={<PrivateRoute><AddInventory /></PrivateRoute>} /> */}
-          <Route path="/" exact element={<Inventory />} />
+          <Route path="/add-inventory" exact element={<PrivateRoute><AddInventory /></PrivateRoute>} />
+          <Route path="/inventory" exact element={<Inventory />} />
         </Routes>
       </div>
     )
