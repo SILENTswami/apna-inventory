@@ -5,7 +5,7 @@ import Reservation from "./Pages/Reservation";
 import PrivateRoute from "./Components/PrivateRoute";
 import AddInventory from "./Pages/AddInventory";
 import Toolbar from "./Components/Toolbar";
-
+import Inventory from "./Pages/Inventory";
 
 class App extends React.Component {
   render() {
@@ -13,9 +13,10 @@ class App extends React.Component {
       <div>
         {localStorage.getItem("token") && <Toolbar/>}
         <Routes>
-          <Route path="/" exact element={<LoginPage />} />
+          {/* <Route path="/" exact element={<LoginPage />} />
           <Route path="/reservation" exact element={<PrivateRoute><Reservation /></PrivateRoute>} />
-          <Route path="/add-inventory" exact element={<PrivateRoute><AddInventory /></PrivateRoute>} />
+          <Route path="/add-inventory" exact element={<PrivateRoute><AddInventory /></PrivateRoute>} /> */}
+          <Route path="/" exact element={<Inventory />} />
         </Routes>
       </div>
     )
