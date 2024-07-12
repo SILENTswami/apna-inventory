@@ -119,6 +119,7 @@ class Inventory extends React.Component {
         return (
           <div className="calendar-header">
             <div className="month-name">{month}</div>
+            
             {daysToDisplay.map(day => {
               const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
               const isToday = day === today;
@@ -129,8 +130,25 @@ class Inventory extends React.Component {
                 </div>
               );
             })}
-          </div>
+            </div> 
         );
+    }
+
+    renderbckdi= (props) => {
+        const { inventoryData, daysInMonth, entries, currentPage, searchTerm, filteredData } = this.state;
+        const daysToDisplay = daysInMonth;
+        const startIndex = (currentPage - 1) * entries;
+        const endIndex = startIndex + entries;
+        const dataToDisplay = searchTerm ? filteredData.slice(startIndex, endIndex) : inventoryData.slice(startIndex, endIndex);
+        
+        return (
+        // dataToDisplay.map((room, index) => (
+          <div  className="room-inventory">
+            <div className="bckdi-name">
+              <span>{dataToDisplay[0].name} <button className="save-button">Save</button></span>
+            </div> 
+         </div>
+        )
     }
 
     renderInventoryTable = () => {
@@ -142,9 +160,12 @@ class Inventory extends React.Component {
         
         return dataToDisplay.map((room, index) => (
           <div key={index} className="room-inventory">
-            <div className="room-name field-name">
+            <div className="room-name">
               <span>{room.name} <button className="save-button">Save</button></span>
             </div>
+
+            {/* <div style={{height:"30px"}}></div> */}
+
             {['available', 'bookings', 'totalSlot', 'roomCost'].map(field => (
               <div key={field} className="inventory-row">
                 <div className="field-name">

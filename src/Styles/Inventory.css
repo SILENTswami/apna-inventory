@@ -5,28 +5,37 @@
 }
 
 .calendar-header {
+  position: sticky;
+  top: 125px;
   display: flex;
   flex-direction: row;
   margin-bottom: 1rem;
-  overflow-x: auto;
+  /* overflow-x: auto; */
+  width:max-content  ;
+  z-index: 11;
+  background-color: #fff;
 }
 
 .month-name {
-  font-size: 1.5em;
+  position: sticky;
+  left: 0;
+  font-size: 2em;
   font-weight: bold;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   margin-left: 12.5px;
   padding-right: 2em;
   flex: 0 0 150px;
   min-width: 150px;
   padding: 5px;
-  box-sizing: border-box;
+  height:fit-content;
+  background-color: #fff;
+  /* box-sizing: border-box; */
 
 }
 
 .days-row {
   display: flex;
-  min-width: max-content;
+  min-width: fit-content;
   align-items: center;
 }
 
@@ -56,9 +65,10 @@
 }
 
 .calendar-day.today {
-  border-right: 2px solid #e0e0e0;
+  border-right: 1px solid #e0e0e0;
   background-color: #a692b7;
-  border-radius: 80%;
+  border-radius: 500px;
+  /* height: 20px; */
 }
 
 .calendar-day.today .date,
@@ -72,7 +82,7 @@
   margin-bottom: 40px;
   margin-left: 1rem;
   position: relative;
-
+  width:max-content  ;
 }
 /* .room-inventory::-webkit-scrollbar {
   display: none; 
@@ -81,6 +91,7 @@
 .inventory-row {
   display: flex;
   align-items: center;
+
 }
 
 .field-name {
@@ -98,15 +109,17 @@
 
 
 .room-name {
-  position: sticky;
-  left: 0;
-  background-color: white;
-  z-index: 2;
-  padding: 8px;
-  width: 100%; 
-  top: 0; /* Add this */
+/* display:none; */
+position: sticky;
+left: 0;
+background-color: white;
+z-index: 2;
+padding: 8px;
+width: fit-content;
+
 
 }
+
 
 .inventory-input {
   flex: 0 0 40px;
@@ -144,6 +157,7 @@
   top: 0;
   width: 100%;
   background-color: white;
+  z-index: 20;
   /* padding: 10px 0;  */
   /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  */
 }
