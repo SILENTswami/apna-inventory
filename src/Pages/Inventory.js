@@ -68,6 +68,7 @@ class Inventory extends React.Component {
             entries: 2,
             searchTerm: '',
             currentPage: 1,
+            filteredData: [] // Initialize filteredData array
         };
     }
 
@@ -133,20 +134,23 @@ class Inventory extends React.Component {
     }
 
     renderInventoryTable = () => {
-        const { inventoryData, daysInMonth, entries, currentPage } = this.state;
+        const { inventoryData, daysInMonth, entries, currentPage, searchTerm, filteredData } = this.state;
         const daysToDisplay = daysInMonth;
         const startIndex = (currentPage - 1) * entries;
         const endIndex = startIndex + entries;
-        const dataToDisplay = inventoryData.slice(startIndex, endIndex);
+        const dataToDisplay = searchTerm ? filteredData.slice(startIndex, endIndex) : inventoryData.slice(startIndex, endIndex);
         
         return dataToDisplay.map((room, index) => (
           <div key={index} className="room-inventory">
-            <div className="room-name">
-              {room.name} <button className="save-button">Save</button>
+            <div className="room-name field-name">
+              <span>{room.name} <button className="save-button">Save</button></span>
             </div>
             {['available', 'bookings', 'totalSlot', 'roomCost'].map(field => (
               <div key={field} className="inventory-row">
-                <span className="field-name">{field.charAt(0).toUpperCase() + field.slice(1)}</span>
+                <div className="field-name">
+                    <span >{field.charAt(0).toUpperCase() + field.slice(1)}</span>
+                    </div>
+                <div className='cell'>
                 {daysToDisplay.map(day => (
                   <input
                     key={day}
@@ -156,6 +160,7 @@ class Inventory extends React.Component {
                     className="inventory-input"
                   />
                 ))}
+                </div>
               </div>
             ))}
           </div>
@@ -180,7 +185,18 @@ class Inventory extends React.Component {
     }
 
     handleSearch = (e) => {
-        this.setState({ searchTerm: e.target.value });
+        const searchTerm = e.target.value;
+        this.setState({ searchTerm }, () => {
+            this.filterInventoryData();
+        });
+    }
+
+    filterInventoryData = () => {
+        const { inventoryData, searchTerm } = this.state;
+        const filteredData = inventoryData.filter(room =>
+            room.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        this.setState({ filteredData });
     }
 
     handlePageChange = (pageNumber) => {
@@ -194,15 +210,17 @@ class Inventory extends React.Component {
     }
 
     handleNextPage = () => {
-        const maxPage = Math.ceil(this.state.entries / this.state.columnsPerPage);
+        const { entries, filteredData, currentPage } = this.state;
+        const maxPage = Math.ceil(filteredData.length / entries);
         this.setState(prevState => ({
             currentPage: Math.min(prevState.currentPage + 1, maxPage)
         }));
     }
 
     renderPagination = () => {
-        const { entries, inventoryData, currentPage } = this.state;
-        const pageCount = Math.ceil(inventoryData.length / entries);
+        const { entries, inventoryData, currentPage, filteredData } = this.state;
+        const dataLength = filteredData.length > 0 ? filteredData.length : inventoryData.length;
+        const pageCount = Math.ceil(dataLength / entries);
         const pageNumbers = [];
 
         for (let i = 1; i <= pageCount; i++) {

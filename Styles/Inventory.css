@@ -21,7 +21,6 @@
   min-width: 150px;
   padding: 5px;
   box-sizing: border-box;
-
 }
 
 .days-row {
@@ -66,17 +65,15 @@
   color: black;
 }
 
-
+.room-name{
+  
+  
+}
 
 .room-inventory {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   margin-left: 1rem;
-  position: relative;
-
 }
-/* .room-inventory::-webkit-scrollbar {
-  display: none; 
-} */
 
 .inventory-row {
   display: flex;
@@ -89,7 +86,7 @@
   background-color: white;
   position: sticky;
   left: 0;
-  z-index: 3;
+  z-index: 100;
   padding: 5px;
   border: 1px solid #ccc;
   /* box-shadow: 2px 0 5px rgba(0,0,0,0.1); */
@@ -97,16 +94,6 @@
 }
 
 
-.room-name {
-  position: sticky;
-  left: 0;
-  background-color: white;
-  z-index: 2;
-  padding: 8px;
-  width: 100%; 
-  top: 0; /* Add this */
-
-}
 
 .inventory-input {
   flex: 0 0 40px;
@@ -144,6 +131,7 @@
   top: 0;
   width: 100%;
   background-color: white;
+  z-index: 0;
   /* padding: 10px 0;  */
   /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  */
 }
@@ -216,10 +204,9 @@
   width: 100%;
   text-align: center;
   justify-content: center;
-  margin-top: 400px;
+  margin-top: 20px;
   bottom: 0;
-  background-color: #fff;
-  z-index: 4;
+  background-color: #fff
 }
 
 .pagination button {
@@ -231,7 +218,6 @@
   background-color: #e2e2e2;
   color: black;
   cursor: pointer;
-
 }
 
 .pagination button.active {
