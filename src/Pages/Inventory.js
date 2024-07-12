@@ -28,12 +28,46 @@ class Inventory extends React.Component {
                     bookings: {},
                     totalSlot: {},
                     roomCost: {}
+                },
+                {
+                    name: 'Single Bed in 25 bed dormitory Room',
+                    available: {},
+                    bookings: {},
+                    totalSlot: {},
+                    roomCost: {}
+                },
+                {
+                    name: 'Single Bed in 30 bed dormitory Room',
+                    available: {},
+                    bookings: {},
+                    totalSlot: {},
+                    roomCost: {}
+                },
+                {
+                    name: 'Single Bed in 35 bed dormitory Room',
+                    available: {},
+                    bookings: {},
+                    totalSlot: {},
+                    roomCost: {}
+                },
+                {
+                    name: 'Single Bed in 40 bed dormitory Room',
+                    available: {},
+                    bookings: {},
+                    totalSlot: {},
+                    roomCost: {}
+                },
+                {
+                    name: 'Single Bed in 45 bed dormitory Room',
+                    available: {},
+                    bookings: {},
+                    totalSlot: {},
+                    roomCost: {}
                 }
             ],
-            entries: 10,
+            entries: 2,
             searchTerm: '',
             currentPage: 1,
-            columnsPerPage: 10
         };
     }
 
@@ -75,13 +109,11 @@ class Inventory extends React.Component {
     }
 
     renderCalendarHeader = () => {
-        const { currentDate, daysInMonth, entries, currentPage, columnsPerPage } = this.state;
+        const { currentDate, daysInMonth } = this.state;
         const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         const month = currentDate.toLocaleString('default', { month: 'long' });
         const today = new Date().getDate();
-        const startIndex = (currentPage - 1) * columnsPerPage;
-        const endIndex = Math.min(startIndex + columnsPerPage, entries);
-        const daysToDisplay = daysInMonth.slice(startIndex, endIndex);
+        const daysToDisplay = daysInMonth;
       
         return (
           <div className="calendar-header">
@@ -101,12 +133,13 @@ class Inventory extends React.Component {
     }
 
     renderInventoryTable = () => {
-        const { inventoryData, daysInMonth, entries, currentPage, columnsPerPage } = this.state;
-        const startIndex = (currentPage - 1) * columnsPerPage;
-        const endIndex = Math.min(startIndex + columnsPerPage, entries);
-        const daysToDisplay = daysInMonth.slice(startIndex, endIndex);
+        const { inventoryData, daysInMonth, entries, currentPage } = this.state;
+        const daysToDisplay = daysInMonth;
+        const startIndex = (currentPage - 1) * entries;
+        const endIndex = startIndex + entries;
+        const dataToDisplay = inventoryData.slice(startIndex, endIndex);
         
-        return inventoryData.map((room, index) => (
+        return dataToDisplay.map((room, index) => (
           <div key={index} className="room-inventory">
             <div className="room-name">
               {room.name} <button className="save-button">Save</button>
@@ -168,8 +201,8 @@ class Inventory extends React.Component {
     }
 
     renderPagination = () => {
-        const { entries, columnsPerPage, currentPage } = this.state;
-        const pageCount = Math.ceil(entries / columnsPerPage);
+        const { entries, inventoryData, currentPage } = this.state;
+        const pageCount = Math.ceil(inventoryData.length / entries);
         const pageNumbers = [];
 
         for (let i = 1; i <= pageCount; i++) {
@@ -209,30 +242,34 @@ class Inventory extends React.Component {
         const { entries, searchTerm } = this.state;
 
         return (
-            <div className="inventory-container">
-                <h2 style={{ margin: '10px' }}>Inventory</h2>
-                <div className="inventory-controls">
-                    <div>
-                        Show 
-                        <select style={{margin:'0 10px'}} value={entries} onChange={this.handleEntriesChange}>
-                            <option value={10}>10</option>
-                            <option value={20}>20</option>
-                            <option value={30}>30</option>
-                        </select>
-                        entries
+            <div className='top'>
+                <div className="inventory-container">
+                <h2 className="inventory-title">Inventory</h2>
+                    <div className="inventory-controls">
+                        <div className="entries-selector">
+                            <span>Show</span>
+                            <select value={entries} onChange={this.handleEntriesChange}>
+                                <option value={1}>1</option>
+                                <option value={2}>2</option>
+                                <option value={5}>5</option>
+                                <option value={10}>10</option>
+                            </select>
+                            <span>entries</span>
+                        </div>
+                        <input
+                            className="search-input"
+                            type="text" 
+                            placeholder="Search..." 
+                            value={searchTerm}
+                            onChange={this.handleSearch}
+                        />
+                        <div className='top-buttons'>
+                            <button className="add-rooms-btn">Add Rooms</button>
+                            <button className="bulk-upload-btn">+ Bulk Upload</button>
+                        </div>    
                     </div>
-                    <input
-                        style={{margin:'0 10px'}} 
-                        type="text" 
-                        placeholder="Search..." 
-                        value={searchTerm}
-                        onChange={this.handleSearch}
-                    />
-                    <div className='top-buttons'>
-                        <button>Add Rooms</button>
-                        <button>+ Bulk Upload</button>
-                    </div>    
                 </div>
+                
                 <div className="inventory-table">
                     {this.renderCalendarHeader()}
                     {this.renderInventoryTable()}
