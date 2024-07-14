@@ -1,3 +1,7 @@
+/* *{
+  margin: 4px;
+} */
+
 .inventory-container {
   overflow-x: auto;
   padding: 20px;
@@ -6,7 +10,7 @@
 
 .calendar-header {
   position: sticky;
-  top: 125px;
+  top: 160px;
   display: flex;
   flex-direction: row;
   margin-bottom: 1rem;
@@ -18,11 +22,11 @@
 
 .month-name {
   position: sticky;
-  left: 0;
+  left: 0px;
   font-size: 2em;
   font-weight: bold;
   /* margin-bottom: 10px; */
-  margin-left: 12.5px;
+  /* margin-left: 12.5px; */
   padding-right: 2em;
   flex: 0 0 150px;
   min-width: 150px;
@@ -80,7 +84,7 @@
 
 .room-inventory {
   margin-bottom: 40px;
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
   position: relative;
   width:max-content  ;
 }
@@ -158,7 +162,7 @@ width: fit-content;
   width: 100%;
   background-color: white;
   z-index: 20;
-  /* padding: 10px 0;  */
+  padding-bottom: 55px; 
   /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  */
 }
 
@@ -306,6 +310,20 @@ width: fit-content;
 
   .inventory-table {
     margin-top: 15em; 
+    background-color: white;
+    z-index: 20;
+  }
+
+  .calendar-header {
+    position: sticky;
+    top: 270px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+    /* overflow-x: auto; */
+    width:max-content  ;
+    z-index: 11;
+    background-color: #fff;
   }
 }
 
@@ -336,6 +354,17 @@ width: fit-content;
   margin-top: 15em; 
 }
   
+.calendar-header {
+  position: sticky;
+  top: 255px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+  /* overflow-x: auto; */
+  width:max-content  ;
+  z-index: 11;
+  background-color: #fff;
+}
 }
 
 @media screen and (min-width: 1025px){
