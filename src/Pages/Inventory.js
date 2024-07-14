@@ -161,7 +161,7 @@ class Inventory extends React.Component {
         return dataToDisplay.map((room, index) => (
           <div key={index} className="room-inventory">
             <div className="room-name">
-              <span>{room.name} <button className="save-button">Save</button></span>
+              <span>{room.name}<button className="save-button">Save</button></span>
             </div>
 
             {/* <div style={{height:"30px"}}></div> */}
@@ -278,45 +278,49 @@ class Inventory extends React.Component {
     }
 
     render() {
-        const { entries, searchTerm } = this.state;
+    const { entries, searchTerm } = this.state;
 
-        return (
-            <div className='top'>
-                <div className="inventory-container">
-                <h2 className="inventory-title">Inventory</h2>
-                    <div className="inventory-controls">
-                        <div className="entries-selector">
-                            <span>Show</span>
-                            <select value={entries} onChange={this.handleEntriesChange}>
-                                <option value={1}>1</option>
-                                <option value={2}>2</option>
-                                <option value={5}>5</option>
-                                <option value={10}>10</option>
-                            </select>
-                            <span>entries</span>
+    return (
+        <div className='inventory-wrapper'>
+            <div className='inventory-content'>
+                <div className='top'>
+                    <div className="inventory-container">
+                        <h2 className="inventory-title">Inventory</h2>
+                        <div className="inventory-controls">
+                            <div className="entries-selector">
+                                <span>Show</span>
+                                <select value={entries} onChange={this.handleEntriesChange}>
+                                    <option value={1}>1</option>
+                                    <option value={2}>2</option>
+                                    <option value={5}>5</option>
+                                    <option value={10}>10</option>
+                                </select>
+                                <span>entries</span>
+                            </div>
+                            <input
+                                className="search-input"
+                                type="text" 
+                                placeholder="Search..." 
+                                value={searchTerm}
+                                onChange={this.handleSearch}
+                            />
+                            <div className='top-buttons'>
+                                <button className="add-rooms-btn">Add Rooms</button>
+                                <button className="bulk-upload-btn">+ Bulk Upload</button>
+                            </div>    
                         </div>
-                        <input
-                            className="search-input"
-                            type="text" 
-                            placeholder="Search..." 
-                            value={searchTerm}
-                            onChange={this.handleSearch}
-                        />
-                        <div className='top-buttons'>
-                            <button className="add-rooms-btn">Add Rooms</button>
-                            <button className="bulk-upload-btn">+ Bulk Upload</button>
-                        </div>    
                     </div>
+                    
+                    <div className="inventory-table">
+                        {this.renderCalendarHeader()}
+                        {this.renderInventoryTable()}
+                    </div>
+                    {this.renderPagination()}
                 </div>
-                
-                <div className="inventory-table">
-                    {this.renderCalendarHeader()}
-                    {this.renderInventoryTable()}
-                </div>
-                {this.renderPagination()}
             </div>
-        );
-    }
+        </div>
+    );
+}
 }
 
 export default Inventory;
