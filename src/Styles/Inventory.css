@@ -299,9 +299,10 @@ width: fit-content;
 }
 
   .top-buttons button {
-      width: 80%;
+      width: 50%;
       margin: 10px;
   }
+
 
   .inventory-table {
     margin-top: 15em; 
@@ -321,10 +322,9 @@ width: fit-content;
     background-color: #fff;
   }
 
-  .top-buttons {
+  .inventory-controls input[type="text"] {
+    width: 95%;
     margin-right: 0;
-    /* margin-top: 10px; */
-    justify-content: space-between;
 }
 
 .inventory-container {
@@ -336,6 +336,8 @@ width: fit-content;
   padding-bottom: 50px; 
   /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  */
 }
+
+
 
 }
 
