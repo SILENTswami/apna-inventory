@@ -65,7 +65,7 @@ class Inventory extends React.Component {
                     roomCost: {}
                 }
             ],
-            entries: 10,
+            entries: 20,
             searchTerm: '',
             currentPage: 1,
             filteredData: [] // Initialize filteredData array
